@@ -1,0 +1,91 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>Messages : View</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+	href="../../css/bootstrap.min.css" />
+</head>
+<body>
+	<h3 layout:fragment="header">Entrega Futura</h3>
+	<div layout:fragment="content" class="container">
+		<form class="form-inline">
+			<input type="text" class="input-small" placeholder="Nome" /> <input
+				type="text" class="input-small" placeholder="Container" /> <input
+				type="text" class="input-small" placeholder="Entregue até" />
+			<button type="submit" class="btn">Buscar</button>
+		</form>
+		Metros:
+		<div class="btn-group" data-toggle="buttons-radio">
+			<button class="btn" onclick="currentAdd(10)">10</button>
+			<button class="btn" onclick="currentAdd(50)">50</button>
+			<button class="btn active" onclick="currentAdd(100)">100</button>
+			<button class="btn" onclick="currentAdd(200)">200</button>
+			<button class="btn" onclick="currentAdd(500)">500</button>
+		</div>
+		<div class="row">
+			<div class="span10">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th width="40%">Nome</th>
+							<th width="20%">Quantidade em Estoque</th>
+							<th width="20%">Quantidade Reservada</th>
+							<th width="20%">Ação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Teste</td>
+							<td>100</td>
+							<td id="qtd-1">0</td>
+							<td>
+								<button class="btn btn-success" onclick="add(1)">+</button>
+								<button class="btn" onclick="rem(1)">-</button>
+								<button class="btn" onclick="info(2)">i</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Teste2</td>
+							<td>30</td>
+							<td id="qtd-2">0</td>
+							<td>
+								<button class="btn btn-success" onclick="add(2)">+</button>
+								<button class="btn" onclick="rem(2)">-</button>
+								<button class="btn" onclick="info(2)">i</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="span2">
+				<div class="thumbnail">
+					<img class="img-rounded" style="width: 150px; height: 100px;"/>
+				    <div class="caption">Selecione item na listagem ao lado para ver mais detalhes.
+				    </div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var addValue = 100;
+			function currentAdd(value) {
+				addValue = value;
+			}
+
+			function add(code) {
+				var element = document.getElementById("qtd-" + code);
+				var current = element.innerHTML;
+				var newValue = parseInt(current) + addValue;
+				element.innerHTML = "" + newValue;
+			}
+
+			function rem(code) {
+				var element = document.getElementById("qtd-" + code);
+				var current = element.innerHTML;
+				var newValue = parseInt(current) - addValue;
+				element.innerHTML = "" + newValue;
+			}
+		</script>
+	</div>
+</body>
+</html>
